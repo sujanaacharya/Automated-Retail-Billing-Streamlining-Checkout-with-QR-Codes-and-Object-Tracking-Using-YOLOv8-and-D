@@ -1,17 +1,22 @@
 # Smart Bill Master with Sales Analyzer System
+This research has been published under the title *Automated Retail Billing: Streamlining Checkout with QR Codes and Object Tracking Using YOLOv8 and DeepSORT* in the **International Journal of Science, Engineering and Technology**, Volume 12, Issue 5. The publication can be accessed [here](https://www.ijset.in/wp-content/uploads/IJSET_V12_issue5_747.pdf), and the DOI is [10.61463/ijset.vol.12.issue5.253](https://doi.org/10.61463/ijset.vol.12.issue5.253).
+
 # Abstract
-Smart Bill Master with Sales Analyzer system has been developed to streamline the
-process of creating bills and recording data in a database. The system consists of a
-conveyor belt that moves when a touch button is pressed, multiple products with their
-own unique QR codes are placed on the moving platform. The QR codes are scanned
-using a camera and detected through image processing. The system shows the bill with
-the product’s name, product id, and price on a digital screen. The system also alerts
-users when a product's expiry date has passed. Data from the QR codes is recorded in
-the database for sales and profit analysis, which can be viewed through plotted graphs.
-Customers registered in the database receive a PDF of their bill via email. Object
-detection algorithms are used to ensure all QR codes are scanned, and YOLOv8 model
-with DeepSORT algorithm is used for object tracking. Thus, we obtain a real time,
-automatic billing system through collaboration between hardware and software.
+In the contemporary retail landscape, long checkout queues and the issuance of expired products
+present significant challenges to operational efficiency. To address these issues and enhance the billing process,
+we propose an innovative solution that automates billing while effectively managing sales data. Our system
+features a conveyor belt mechanism activated by a touch sensor, where products, each with unique QR codes,
+are placed. A camera captures live video of the conveyor belt, enabling real-time detection and decoding of
+these QR codes, along with immediate alerts for any expired products identified. The system generates a
+comprehensive bill detailing product names, IDs, and prices, while securely storing scanned data in a database
+for in-depth sales and profit analysis, complemented by graphical visualizations. Registered customers receive a
+PDF copy of their bill via email through the Simple Mail Transfer Protocol (SMTP), enhancing their overall
+experience. By employing the You Only Look Once version 8 (YOLOv8) model alongside the Deep Simple Online
+and Realtime Tracking (DeepSORT) algorithm, the system ensures precise object tracking and accurate
+scanning of each product. The Raspberry Pi serves as the core component of the system, managing the
+integration of advanced hardware and software. This solution significantly improves the efficiency and
+accuracy of the billing process, offering a holistic approach to modern retail management.
+
 
 # Getting Started
 
@@ -115,7 +120,7 @@ Automatic Billing: The system automates the billing process through the conveyor
 
 Digital Screen Display: The bill with product details and prices is displayed on a digital screen.
 
-Expiry Date Alerts: Users receive alerts when a product's expiry date has passed.
+Expiry Date Alerts: Users receive alerts when a product’s expiry date has passed.
 
 Sales Data Analysis: Sales and profit data are recorded in the database, and graphical analysis can be viewed through plotted graphs.
 
@@ -154,26 +159,31 @@ To set up the environment, follow these steps:
     ```bash
     cd path/to/YOLOv8-DeepSORT-Object-Tracking
     ```
+4. For GPU support (Optional): 
 
-4. Install the required dependencies:
+   ```bash
+   conda install pytorch torchvision torchaudio pytorch-cuda=12.4 -c pytorch -c nvidia
+   ```
+
+5. Install the required dependencies:
 
     ```bash
-    pip install -e '.[dev]'
+    pip install -e .
     ```
 
 ## Dataset
 
-Download the dataset from the provided [YOLOv8-DeepSORT Dataset Google Drive link]( https://drive.google.com/drive/folders/1zYtoQVUe5BzWOrYn7ZpevUNd-alyM4oL ).
+Download the dataset from the provided [here](https://drive.google.com/drive/folders/13R2yus7L8AjsEkIGYPs52fH0dBwGeijf?usp=drive_link).
 
 Organize the dataset as follows:
 
 - Change to the YOLOv8 detection directory:
 
     ```bash
-    cd ./YOLOv8-DeepSORT-Object-Tracking/ultralytics/yolo/v8/detect
+    cd ./ultralytics/yolo/v8/detect
     ```
 
-- Download the 'detection-1' folder from the Google Drive link.
+- Download the 'detection-1' folder from the provided link.
 
 - Place the downloaded 'detection-1' folder into the following directory.
 
@@ -188,6 +198,20 @@ To train the YOLOv8 model for object detection, follow these steps:
     ```
 
    Adjust the parameters as needed for your specific use case.
+
+## Model Performance
+The model achieved the following performance on the validation set:
+
+| Metric        | Value  |
+|---------------|--------|
+| Precision     | 0.973  |
+| Recall        | 0.972  |
+| mAP@50        | 0.99   |
+| mAP@50-95     | 0.873  |
+
+## Download Model Weights
+
+You can download the pre-trained model weights from [here](https://drive.google.com/drive/folders/1a0R1WCcFqSIqC0mbEcDaUJeKTJefsi9T?usp=drive_link)
 
 ## Prediction
 
@@ -206,20 +230,17 @@ Feel free to explore and customize the codebase according to your requirements. 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
 # Demo Video
-You can find a demo video of the system ( https://drive.google.com/drive/folders/1zYtoQVUe5BzWOrYn7ZpevUNd-alyM4oL ).
+You can find a demo video of the system [here](https://drive.google.com/file/d/1Nx5U0XAAnP2LRwvy6ZQsLpdIsvvsCjZC/view?usp=drive_link).
 
 # Contributors
-1. Apsara Shrestha
-2. Bishwambhar Dahal
-3. Sirjana Bhatta
-4. Sujana Acharya
+1. Bishwambhar Dahal 
+2. Sirjana Bhatta
+3. Sujana Acharya
+4. Apsara Shrestha
+5. Praches Acharya
 
 # Acknowledgments
-We would like to thank Institute of Engineering (IOE) for the inclusion of Minor
-Project on the syllabus for the course Bachelor in Electronics, Communication and
-Information Engineering.
+We would like to express our sincere gratitude to our supervisor, Er. Praches Acharya, for his invaluable guidance throughout this research. We also extend our heartfelt thanks to the Department of Electronics and Computer Engineering at Thapathali Campus for providing us with the resources and a conducive environment that greatly contributed to the success of this research.
 Also, we would like to thank Department of Electronics and Computer Engineering,
 Thapathali Campus for providing us the guidance, and wonderful learning
-environment. We would also like to thank our supervisor Er. Praches Acharya for
-continuous guidance and encouragement
-
+environment.
